@@ -1,4 +1,4 @@
 package org.example.exception;
 
-public class NullStudentsInGroupException extends Exception{
+public class NullStudentsInGroupException extends CustomException{
 }

@@ -5,22 +5,24 @@ import org.example.exception.ScoreOutOfBoundException;
 
 import java.util.List;
 
+
 public class Subject {
+
     private Subjects nameSubject;
     private List<Integer> scores;
 
-    public Subject(Subjects nameSubject, List<Integer> scores) throws ScoreOutOfBoundException {
-        this.nameSubject = nameSubject;
-        this.scores = scores;
-        if (!checkScore(scores)){
+    public Subject(Subjects nameSubjects, List<Integer> scores) throws ScoreOutOfBoundException {
+
+        this.nameSubject = nameSubjects;
+        if (!checkScore(scores)) {
             throw new ScoreOutOfBoundException();
         }
-
+        this.scores = scores;
     }
 
-    private boolean checkScore(List<Integer> scores){
-        for (Integer score: scores) {
-            if(score < 0 || score > 10) {
+    public boolean checkScore(List<Integer> scores) {
+        for (Integer score : scores) {
+            if (score < 0 || score > 10) {
                 return false;
             }
         }
@@ -35,11 +37,20 @@ public class Subject {
         return scores;
     }
 
-    public int getOverageScore(){
-        int overageScore = 0;
-        for (Integer score: scores) {
+    public double getOverageScore() {
+        double overageScore = 0;
+        for (Integer score : scores) {
             overageScore += score;
         }
-        return overageScore/scores.size();
+        return overageScore / scores.size();
+    }
+
+    public void setNameSubject(Subjects nameSubjects) {
+        this.nameSubject = nameSubjects;
+    }
+
+    public void setScores(List<Integer> scores) {
+        this.scores = scores;
     }
 }
+

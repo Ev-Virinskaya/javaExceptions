@@ -1,53 +1,81 @@
 package org.example.structure;
 
-import org.example.constans.Faculties;
 import org.example.constans.Groups;
+import org.example.constans.Subjects;
 import org.example.exception.NullSubjectsForStudentException;
 import org.example.exception.ScoreOutOfBoundException;
 
-import java.util.Set;
+import java.util.*;
+
 
 public class Student {
-    private Faculties faculty;
+    private String studentName;
     private Groups group;
-    private Set<Subject> subjects;
+    private Set<Subject> subjectSet;
 
-    public Student(Faculties faculty, Groups group, Set<Subject> subjects) throws NullSubjectsForStudentException, ScoreOutOfBoundException {
-        this.faculty = faculty;
+
+    public Student(String studentName, Groups group, Set<Subject> subjectSet) throws NullSubjectsForStudentException {
+        this.studentName = studentName;
         this.group = group;
-        this.subjects = subjects;
-        if (subjects == null || subjects.isEmpty()) {
+        if (subjectSet == null || subjectSet.isEmpty()) {
             throw new NullSubjectsForStudentException();
         }
+        this.subjectSet = subjectSet;
     }
 
-    public Faculties getFaculty() {
-        return faculty;
+    public double getOverageScoreByAllSubjects() {
+        double sumScore = 0;
+        int countSubjectsWithScores = 0;
+        for (Subject subject : subjectSet) {
+            if (subject.getScores() != null && !subject.getScores().isEmpty()) {
+                sumScore += subject.getOverageScore();
+                countSubjectsWithScores++;
+            }
+        }
+        return sumScore / countSubjectsWithScores;
+    }
+
+    public double getOverageScoreBySubject(Subjects currentSubject) {
+        double overageScore = 0;
+        for (Subject subject : subjectSet) {
+            if (subject.getNameSubject().equals(currentSubject)) {
+                overageScore = subject.getOverageScore();
+            }
+        }
+        return overageScore;
+
+    }
+
+    public boolean checkHasSubject(Subjects currentSubject) {
+        for (Subject subject : subjectSet) {
+            if (subject.getNameSubject().equals(currentSubject)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     public Groups getGroup() {
         return group;
     }
 
-    public Set<Subject> getSubjects() {
-        return subjects;
+    public void setGroup(Groups group) {
+        this.group = group;
     }
 
-    public int getOverageScoreByAllSubjects(Set<Subject> subjects) {
-        int overageScore = 0;
-        for (Subject subject : subjects) {
-            overageScore += getOverageScoreBySubject(subject);
-        }
-        return overageScore / subjects.size();
+    public Set<Subject> getSubjectSet() {
+        return subjectSet;
     }
 
-    public int getOverageScoreBySubject(Subject subject) {
-        int overageScore = 0;
-        for (Subject sub : subjects) {
-            if (sub.equals(subject)) {
-                overageScore += sub.getOverageScore();
-            }
-        }
-        return overageScore / subjects.size();
+    public void setSubjectSet(Set<Subject> subjectSet) {
+        this.subjectSet = subjectSet;
     }
 }

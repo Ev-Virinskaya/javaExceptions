@@ -1,8 +1,12 @@
 package org.example.structure;
 
+import org.example.constans.Subjects;
 import org.example.exception.NullFacultyInUniversityException;
+import org.example.exception.ScoreOutOfBoundException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -24,21 +28,26 @@ public class University {
         this.facultyList = facultyList;
     }
 
-    public Set<Student> getAllStudentsOfUniversity() {
-        Set<Student> allStudentsInUniversity = new HashSet<>();
+    public List<Student> getAllStudentsOfUniversity() {
+        List<Student> allStudentsInUniversity = new ArrayList<>();
         for (Faculty faculty : facultyList) {
-            allStudentsInUniversity.addAll(faculty.getAllStudentsOfFaculty());
+            allStudentsInUniversity.addAll(faculty.getAllStudentsForFaculty());
         }
         return allStudentsInUniversity;
     }
 
-    public int getOverageScoreBySubject(Set<Student> students, Subject subject) {
-        int overageScoreBySubjectInGroup = 0;
-        for (Student student : students) {
+    public double getOverageScoreBySubjectForUniversity(Subjects subject) {
+        double overageScoreBySubjectInGroup = 0;
+        int numberOfStudentsHaveSubject = 0;
+        for (Student student : getAllStudentsOfUniversity()) {
+            if(student.checkHasSubject(subject)){
             overageScoreBySubjectInGroup += student.getOverageScoreBySubject(subject);
+            numberOfStudentsHaveSubject++;
+            }
         }
-        return overageScoreBySubjectInGroup / students.size();
+        return overageScoreBySubjectInGroup / numberOfStudentsHaveSubject;
 
     }
+
 
 }
