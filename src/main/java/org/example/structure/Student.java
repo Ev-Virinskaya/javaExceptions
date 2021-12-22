@@ -3,16 +3,13 @@ package org.example.structure;
 import org.example.constans.Groups;
 import org.example.constans.Subjects;
 import org.example.exception.NullSubjectsForStudentException;
-import org.example.exception.ScoreOutOfBoundException;
 
 import java.util.*;
-
 
 public class Student {
     private String studentName;
     private Groups group;
     private Set<Subject> subjectSet;
-
 
     public Student(String studentName, Groups group, Set<Subject> subjectSet) throws NullSubjectsForStudentException {
         this.studentName = studentName;
@@ -43,7 +40,6 @@ public class Student {
             }
         }
         return overageScore;
-
     }
 
     public boolean checkHasSubject(Subjects currentSubject) {
@@ -53,29 +49,5 @@ public class Student {
             }
         }
         return false;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public Groups getGroup() {
-        return group;
-    }
-
-    public void setGroup(Groups group) {
-        this.group = group;
-    }
-
-    public Set<Subject> getSubjectSet() {
-        return subjectSet;
-    }
-
-    public void setSubjectSet(Set<Subject> subjectSet) {
-        this.subjectSet = subjectSet;
     }
 }

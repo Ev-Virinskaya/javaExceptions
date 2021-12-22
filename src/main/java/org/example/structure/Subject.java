@@ -7,12 +7,10 @@ import java.util.List;
 
 
 public class Subject {
-
     private Subjects nameSubject;
     private List<Integer> scores;
 
     public Subject(Subjects nameSubjects, List<Integer> scores) throws ScoreOutOfBoundException {
-
         this.nameSubject = nameSubjects;
         if (!checkScore(scores)) {
             throw new ScoreOutOfBoundException();
@@ -43,14 +41,6 @@ public class Subject {
             overageScore += score;
         }
         return overageScore / scores.size();
-    }
-
-    public void setNameSubject(Subjects nameSubjects) {
-        this.nameSubject = nameSubjects;
-    }
-
-    public void setScores(List<Integer> scores) {
-        this.scores = scores;
     }
 }
 

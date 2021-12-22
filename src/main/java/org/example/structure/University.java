@@ -19,15 +19,6 @@ public class University {
             throw new NullFacultyInUniversityException();
         }
     }
-
-    public Set<Faculty> getFacultyList() {
-        return facultyList;
-    }
-
-    public void setFacultyList(Set<Faculty> facultyList) {
-        this.facultyList = facultyList;
-    }
-
     public List<Student> getAllStudentsOfUniversity() {
         List<Student> allStudentsInUniversity = new ArrayList<>();
         for (Faculty faculty : facultyList) {

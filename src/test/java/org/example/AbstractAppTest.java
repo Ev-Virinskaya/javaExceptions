@@ -21,15 +21,15 @@ abstract class AbstractAppTest {
 
     @BeforeEach
     protected void setUp() {
-       try {
-           university = new University(getFacultyList());
-           faculty = new Faculty(Faculties.FACULTY_ONE, getGroupList(Faculties.FACULTY_ONE));
-           group = new Group(Groups.ONE, Faculties.FACULTY_ONE, getStudentsList(Groups.ONE));
-           student = new Student("Ivanov", Groups.ONE, getSubjectSet("Ivanov"));
-           subject = new Subject(Subjects.MATHS, Arrays.asList(2, 7, 4));
-       }catch (CustomException e){
-           e.getCause();
-       }
+        try {
+            university = new University(getFacultyList());
+            faculty = new Faculty(Faculties.FACULTY_ONE, getGroupList(Faculties.FACULTY_ONE));
+            group = new Group(Groups.ONE, Faculties.FACULTY_ONE, getStudentsList(Groups.ONE));
+            student = new Student("Ivanov", Groups.ONE, getSubjectSet("Ivanov"));
+            subject = new Subject(Subjects.MATHS, Arrays.asList(2, 7, 4));
+        } catch (CustomException e) {
+            e.printStackTrace();
+        }
     }
 
     protected Set<Faculty> getFacultyList() {
@@ -37,8 +37,8 @@ abstract class AbstractAppTest {
         try {
             facultyList.add(new Faculty(Faculties.FACULTY_ONE, getGroupList(Faculties.FACULTY_ONE)));
             facultyList.add(new Faculty(Faculties.FACULTY_TWO, getGroupList(Faculties.FACULTY_TWO)));
-        }catch (NullGroupsInFacultyException e){
-            e.getCause();
+        } catch (NullGroupsInFacultyException e) {
+            e.printStackTrace();
         }
         return facultyList;
     }
@@ -53,8 +53,8 @@ abstract class AbstractAppTest {
                 groupList.add(new Group(Groups.FOUR, faculties, getStudentsList(Groups.FOUR)));
                 groupList.add(new Group(Groups.TREE, faculties, getStudentsList(Groups.TREE)));
             }
-        }catch (NullStudentsInGroupException e){
-            e.getCause();
+        } catch (NullStudentsInGroupException e) {
+            e.printStackTrace();
         }
         return groupList;
     }
@@ -76,7 +76,7 @@ abstract class AbstractAppTest {
                 studentsList.add(new Student("Pupkin", groups, getSubjectSet("Pupkin")));
             }
         } catch (NullSubjectsForStudentException e) {
-            e.getCause();
+            e.printStackTrace();
         }
         return studentsList;
     }
@@ -110,7 +110,7 @@ abstract class AbstractAppTest {
                 subjectSet.add(new Subject(Subjects.ECONOMY, Arrays.asList(0, 9)));
             }
         } catch (ScoreOutOfBoundException e) {
-            e.getLocalizedMessage();
+            e.printStackTrace();
         }
         return subjectSet;
     }

@@ -3,7 +3,6 @@ package org.example.structure;
 import org.example.constans.Faculties;
 import org.example.constans.Subjects;
 import org.example.exception.NullGroupsInFacultyException;
-import org.example.exception.ScoreOutOfBoundException;
 
 import java.util.*;
 
@@ -19,23 +18,6 @@ public class Faculty {
             throw new NullGroupsInFacultyException();
         }
     }
-
-    public Set<Group> getGroupList() {
-        return groupList;
-    }
-
-    public void setGroupList(Set<Group> groupList) {
-        this.groupList = groupList;
-    }
-
-    public Faculties getNameFaculty() {
-        return nameFaculty;
-    }
-
-    public void setNameFaculty(Faculties nameFaculty) {
-        this.nameFaculty = nameFaculty;
-    }
-
     public Set<Student> getAllStudentsForFaculty() {
         Set<Student> allStudentsInFaculty = new HashSet<>();
         for (Group group : groupList) {
@@ -43,8 +25,7 @@ public class Faculty {
         }
         return allStudentsInFaculty;
     }
-
-    public double getOverageScoreBySubjectForFaculty(Subjects subject) throws ScoreOutOfBoundException {
+    public double getOverageScoreBySubjectForFaculty(Subjects subject){
         double overageScore = 0;
         int numberGroupsHasSubject = 0;
         for (Group group : groupList) {
