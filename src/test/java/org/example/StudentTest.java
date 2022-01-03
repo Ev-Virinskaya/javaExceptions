@@ -1,33 +1,32 @@
 package org.example;
 
-import org.example.constans.Groups;
 import org.example.constans.Subjects;
 import org.example.exception.NullSubjectsForStudentException;
-import org.example.structure.Student;
+import org.example.beans.Student;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
-class StudentTest extends AbstractAppTest {
+public class StudentTest extends AbstractAppTest {
     @Test
-    void shouldGetOverageScoreByAllSubjects() {
+    public void shouldGetOverageScoreByAllSubjects() {
         double expectedOverageScore = 6;
-        double actualOverageScore = student.getOverageScoreByAllSubjects();
+        double actualOverageScore = student.getAverageScoreByAllSubjects();
         Assertions.assertEquals(expectedOverageScore,actualOverageScore);
     }
     @Test
-    void shouldGetOverageScoreBySubject() {
+    public void shouldGetOverageScoreBySubject() {
         double expectedOverageScore = 7.5;
-        double actualOverageScore = student.getOverageScoreBySubject(Subjects.MATHS);
+        double actualOverageScore = student.getAverageScoreBySubject(Subjects.MATHS);
         Assertions.assertEquals(expectedOverageScore,actualOverageScore);
     }
     @Test
-    void shouldThrowExceptionForGetEmptySubjectsSet() {
-        Assertions.assertThrows(NullSubjectsForStudentException.class, () -> new Student("Fedya", Groups.FIVE, new HashSet<>()));
+    public void shouldThrowExceptionForGetEmptySubjectsSet() {
+        Assertions.assertThrows(NullSubjectsForStudentException.class, () -> new Student("Fedya", new HashSet<>()));
     }
     @Test
-    void shouldThrowExceptionForGetSubjectsSetNullValue() {
-        Assertions.assertThrows(NullSubjectsForStudentException.class, () -> new Student("Fedya", Groups.FIVE, null));
+    public void shouldThrowExceptionForGetSubjectsSetNullValue() {
+        Assertions.assertThrows(NullSubjectsForStudentException.class, () -> new Student("Fedya", null));
     }
 }

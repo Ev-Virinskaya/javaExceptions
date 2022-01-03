@@ -1,28 +1,27 @@
 package org.example;
 
-import org.example.constans.Faculties;
 import org.example.constans.Groups;
 import org.example.constans.Subjects;
 import org.example.exception.NullStudentsInGroupException;
-import org.example.structure.Group;
+import org.example.beans.Group;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
-class GroupTest extends AbstractAppTest {
+public class GroupTest extends AbstractAppTest {
     @Test
-    void getOverageScoreBySubjectForGroup() {
+    public void getOverageScoreBySubjectForGroup() {
         double expectedOverageScore = 4.666666666666667;
-        double actualOverageScore = group.getOverageScoreBySubjectForGroup(Subjects.MATHS);
+        double actualOverageScore = group.getAverageScoreBySubjectForGroup(Subjects.MATHS);
         Assertions.assertEquals(expectedOverageScore,actualOverageScore);
     }
     @Test
-    void shouldThrowExceptionForGetEmptyStudentsSet() {
-        Assertions.assertThrows(NullStudentsInGroupException.class, () -> new Group(Groups.FIVE, Faculties.FACULTY_ONE, new HashSet<>()));
+    public void shouldThrowExceptionForGetEmptyStudentsSet() {
+        Assertions.assertThrows(NullStudentsInGroupException.class, () -> new Group(Groups.FIVE, new HashSet<>()));
     }
     @Test
-    void shouldThrowExceptionForGetStudentsSetNullValue() {
-        Assertions.assertThrows(NullStudentsInGroupException.class, () -> new Group(Groups.FIVE, Faculties.FACULTY_ONE, null));
+    public void shouldThrowExceptionForGetStudentsSetNullValue() {
+        Assertions.assertThrows(NullStudentsInGroupException.class, () -> new Group(Groups.FIVE, null));
     }
 }

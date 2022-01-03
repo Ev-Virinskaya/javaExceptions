@@ -1,4 +1,4 @@
-package org.example.structure;
+package org.example.beans;
 
 import org.example.constans.Subjects;
 import org.example.exception.ScoreOutOfBoundException;
@@ -7,8 +7,8 @@ import java.util.List;
 
 
 public class Subject {
-    private Subjects nameSubject;
-    private List<Integer> scores;
+    private final Subjects nameSubject;
+    private final List<Integer> scores;
 
     public Subject(Subjects nameSubjects, List<Integer> scores) throws ScoreOutOfBoundException {
         this.nameSubject = nameSubjects;
@@ -35,12 +35,12 @@ public class Subject {
         return scores;
     }
 
-    public double getOverageScore() {
-        double overageScore = 0;
+    public double getAverageScore() {
+        double averageScore = 0;
         for (Integer score : scores) {
-            overageScore += score;
+            averageScore += score;
         }
-        return overageScore / scores.size();
+        return averageScore / scores.size();
     }
 }
 

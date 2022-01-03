@@ -1,45 +1,42 @@
-package org.example.structure;
+package org.example.beans;
 
-import org.example.constans.Groups;
 import org.example.constans.Subjects;
 import org.example.exception.NullSubjectsForStudentException;
 
-import java.util.*;
+import java.util.Set;
 
 public class Student {
-    private String studentName;
-    private Groups group;
-    private Set<Subject> subjectSet;
+    private final String studentName;
+    private final Set<Subject> subjectSet;
 
-    public Student(String studentName, Groups group, Set<Subject> subjectSet) throws NullSubjectsForStudentException {
+    public Student(String studentName, Set<Subject> subjectSet) throws NullSubjectsForStudentException {
         this.studentName = studentName;
-        this.group = group;
         if (subjectSet == null || subjectSet.isEmpty()) {
             throw new NullSubjectsForStudentException();
         }
         this.subjectSet = subjectSet;
     }
 
-    public double getOverageScoreByAllSubjects() {
+    public double getAverageScoreByAllSubjects() {
         double sumScore = 0;
         int countSubjectsWithScores = 0;
         for (Subject subject : subjectSet) {
             if (subject.getScores() != null && !subject.getScores().isEmpty()) {
-                sumScore += subject.getOverageScore();
+                sumScore += subject.getAverageScore();
                 countSubjectsWithScores++;
             }
         }
         return sumScore / countSubjectsWithScores;
     }
 
-    public double getOverageScoreBySubject(Subjects currentSubject) {
-        double overageScore = 0;
+    public double getAverageScoreBySubject(Subjects currentSubject) {
+        double averageScore = 0;
         for (Subject subject : subjectSet) {
             if (subject.getNameSubject().equals(currentSubject)) {
-                overageScore = subject.getOverageScore();
+                averageScore = subject.getAverageScore();
             }
         }
-        return overageScore;
+        return averageScore;
     }
 
     public boolean checkHasSubject(Subjects currentSubject) {
